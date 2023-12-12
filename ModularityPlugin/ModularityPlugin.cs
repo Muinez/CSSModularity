@@ -3,6 +3,7 @@ using System.Runtime.Loader;
 using CounterStrikeSharp.API.Core;
 using CounterStrikeSharp.API.Core.Plugin.Host;
 using McMaster.NETCore.Plugins;
+using Microsoft.Extensions.Logging;
 using Modularity;
 
 namespace ModularityPlugin;
@@ -16,14 +17,14 @@ public class ModularityPlugin : BasePlugin
     private readonly List<(AssemblyName name, Assembly assembly)> _sharedAssemblies = new();
 
     private bool _loaded;
-    
+
     public ModularityPlugin()
     {
         var app = typeof(Application).GetProperty("Instance")!.GetValue(null);
         _pluginManager =
             (IPluginManager)typeof(Application).GetField("_pluginManager",
                 BindingFlags.Instance | BindingFlags.NonPublic)!.GetValue(app)!;
-        
+
         AssemblyLoadContext.Default.Resolving += (context, name) =>
         {
             if (!_loaded)
@@ -31,11 +32,11 @@ public class ModularityPlugin : BasePlugin
                 LoadSharedLibs();
                 _loaded = true;
             }
-            
+
             var assembly = _sharedAssemblies.FirstOrDefault(a => a.name.Name == name.Name);
             if (assembly.assembly == null)
             {
-                Console.WriteLine("cant find");
+                Logger.LogError($"Cant find {name}");
                 return null;
             }
 
@@ -54,7 +55,7 @@ public class ModularityPlugin : BasePlugin
         {
             _pluginManager.LoadPlugin(pluginDir + "/" + Path.GetFileName(pluginDir) + ".dll");
             var loadedPlugin = _pluginManager.GetLoadedPlugins().Last();
-            Console.WriteLine($"Load modular plugin: {loadedPlugin.Plugin.ModuleName}");
+            Logger.LogInformation($"Load modular plugin: {loadedPlugin.Plugin.ModuleName}");
 
             loadedPlugins.Add(loadedPlugin.Plugin);
         }
@@ -94,6 +95,6 @@ public class ModularityPlugin : BasePlugin
 
         _sharedAssemblies.Add((assembly.GetName(), assembly));
 
-        Console.WriteLine($"Load shared library: {assembly.FullName}");
+        Logger.LogInformation($"Load shared library: {assembly.FullName}");
     }
 }
