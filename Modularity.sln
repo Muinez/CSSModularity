@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModularityPlugin", "ModularityPlugin\ModularityPlugin.csproj", "{A3E22B37-71A1-4EFF-A2AB-ABC068E84C49}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modularity", "Modularity\Modularity.csproj", "{4652AFF3-19EE-4EB0-B9EA-24CF506A42EB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A3E22B37-71A1-4EFF-A2AB-ABC068E84C49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3E22B37-71A1-4EFF-A2AB-ABC068E84C49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3E22B37-71A1-4EFF-A2AB-ABC068E84C49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3E22B37-71A1-4EFF-A2AB-ABC068E84C49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4652AFF3-19EE-4EB0-B9EA-24CF506A42EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4652AFF3-19EE-4EB0-B9EA-24CF506A42EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4652AFF3-19EE-4EB0-B9EA-24CF506A42EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4652AFF3-19EE-4EB0-B9EA-24CF506A42EB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
