@@ -25,7 +25,7 @@ public class ModularityPlugin : BasePlugin
             (IPluginManager)typeof(Application).GetField("_pluginManager",
                 BindingFlags.Instance | BindingFlags.NonPublic)!.GetValue(app)!;
 
-        AssemblyLoadContext.Default.Resolving += (context, name) =>
+        AssemblyLoadContext.Default.Resolving += (context, assemblyName) =>
         {
             if (!_loaded)
             {
@@ -33,10 +33,13 @@ public class ModularityPlugin : BasePlugin
                 _loaded = true;
             }
 
-            var assembly = _sharedAssemblies.FirstOrDefault(a => a.name.Name == name.Name);
+            var assembly = _sharedAssemblies.FirstOrDefault(a => a.name.Name == assemblyName.Name);
             if (assembly.assembly == null)
             {
-                Logger.LogError($"Cant find {name}");
+                var name = assemblyName.Name;
+                if (name != null && !name.EndsWith(".resources"))
+                    Logger.LogError($"Cant find {assemblyName}");
+
                 return null;
             }
 
