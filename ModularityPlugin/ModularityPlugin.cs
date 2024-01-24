@@ -11,7 +11,7 @@ namespace ModularityPlugin;
 public class ModularityPlugin : BasePlugin
 {
     public override string ModuleName => "Modularity";
-    public override string ModuleVersion => "1.0.0";
+    public override string ModuleVersion => "1.0.1";
 
     private readonly IPluginManager _pluginManager;
     private readonly List<(AssemblyName name, Assembly assembly)> _sharedAssemblies = new();
